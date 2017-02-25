@@ -19,7 +19,8 @@ public class Krukskal<T> {
     }
 
 
-    public List<Edge<T>> getMST(Graph<T> graph){
+    public List<Edge<T>> getMST(Graph<T> graph,int weight){
+        addExitEntryEdges(graph,weight);
         List<Edge<T>> allEdges = graph.getEdges();
         EdgeComparator edgeComparator = new EdgeComparator();
 
@@ -65,5 +66,14 @@ public class Krukskal<T> {
 
         return maxST;
 
+    }
+
+    public void addExitEntryEdges(Graph<T> graph, int weight){
+        Collection<Vertex<T>> edgeList = graph.getVertices();
+        List<Vertex<T>> edges = new ArrayList<>();
+        for (Vertex<T> vertex: edgeList){
+            edgeList.add(vertex);
+        }
+        graph.addEdge(edges.get(edgeList.size()-1).getId(),edges.get(1).getId(),weight);
     }
 }
